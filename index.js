@@ -3,6 +3,10 @@ var config = require('./config.json') // See config.template.json for sample con
 var app = express()
 app.set('port', config.port || 3000)
 app.set('env', config.env || 'development')
+// Allow self-signed certs in development
+if (app.get('env') == 'development') {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+}
 var server = app.listen(app.get('port'), function () {
     console.log('Listening on port %s.', server.address().port)
     console.log('Website live in ' + config.env +' environment at http://localhost:' + app.get('port') + '/')
