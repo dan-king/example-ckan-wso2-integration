@@ -12,3 +12,7 @@ var server = app.listen(app.get('port'), function () {
     console.log('Website live in ' + config.env +' environment at http://localhost:' + app.get('port') + '/')
     console.log('Press Ctrl-C to terminate.')
 })
+
+app.get('/', function(req, res) {
+    return res.send('Hello World!')
+})
