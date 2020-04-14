@@ -13,6 +13,12 @@ var server = app.listen(app.get('port'), function () {
     console.log('Press Ctrl-C to terminate.')
 })
 // ===============================================
+// Use 'body-parser' to enable reading of POST requests
+// in req.body
+// ===============================================
+// npm i -S body-parser
+app.use(require('body-parser').urlencoded({extended: true}))
+// ===============================================
 // Set up Handlebars view engine
 // ===============================================
 var express_handlebars = require('express-handlebars').create({ defaultLayout:'main' }) // npm i -S express-handlebars
