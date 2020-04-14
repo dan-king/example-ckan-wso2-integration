@@ -61,8 +61,23 @@
     </table>
 </form>
 
+{{#if err}}
+    <p>
+    err: {{err}}
+    </p>
+{{/if}}
+
 {{#if wso2_request_url}}
     <p>
     WSO2 Request URL: {{wso2_request_url}}
     </p>
+{{/if}}
+
+{{#if gateway_response}}
+    <p>
+    Gateway Response:
+    </p>
+    <div>
+        {{gateway_response}}
+    </div>
 {{/if}}

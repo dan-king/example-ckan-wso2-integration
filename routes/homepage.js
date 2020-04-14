@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+var request = require('request') // npm i -S request
 var config = require('./../config.json')
 
 // Show form with default values
@@ -43,14 +44,48 @@ router.post('/datastore_search', function(req, res){
     // ===================================================
     // Invoke API
     // ===================================================
-    res.render('home', {
-        wso2_gateway_url: wso2_gateway_url,
-        wso2_ckan_context: wso2_ckan_context,
-        wso2_subscription_key: wso2_subscription_key,
-        ckan_resource_id: ckan_resource_id,
-        ckan_api_key: ckan_api_key,
-        search_term: search_term,
-        wso2_request_url: wso2_request_url
+    const options = {
+        url: wso2_request_url,
+        method: 'GET',
+        timeout: 1500,
+        headers: {
+            Authorization : 'Bearer ' + wso2_subscription_key,
+            'X-CKAN-API-Key' : ckan_api_key
+        }
+    }
+    request(options, (err, response, body) => {
+        var gateway_response
+        var gateway_response_json
+        if (err) { 
+            console.log('err:', err)
+            var mock_response = '{"help": "https://mock.url/api/3/action/datastore_search?id=mock", "success": true, "result": ["THIS IS A MOCK RESPONSE", "a", "b", "c", "d", "e", "f", "g"]}'
+            body = mock_response
+        }
+        gateway_response = body
+        console.log('*************************')
+        console.log('body:', body)
+        console.log('*************************')
+        try {
+            gateway_response_json = JSON.parse(gateway_response)
+        } catch (e) {
+            console.log('Error: body object is not valid JSON')
+            gateway_response_json = '{"error": "body object is not valid JSON","result": { "body": "'+encodeURIComponent(body)+'" }}'
+        }
+        // ===================================================
+        // Return Response
+        // ===================================================
+        res.render('home', {
+            err: err,
+            wso2_gateway_url: wso2_gateway_url,
+            wso2_ckan_context: wso2_ckan_context,
+            wso2_subscription_key: wso2_subscription_key,
+            ckan_resource_id: ckan_resource_id,
+            ckan_api_key: ckan_api_key,
+            search_term: search_term,
+            wso2_request_url: wso2_request_url,
+            gateway_response: gateway_response,
+            gateway_response_json: gateway_response_json
+        })    
     })
 })
 
