@@ -13,6 +13,13 @@ var server = app.listen(app.get('port'), function () {
     console.log('Press Ctrl-C to terminate.')
 })
 // ===============================================
+// Set up Handlebars view engine
+// ===============================================
+var express_handlebars = require('express-handlebars').create({ defaultLayout:'main' }) // npm i -S express-handlebars
+// Use the handlebars as the view engine
+app.engine('handlebars', express_handlebars.engine)
+app.set('view engine', 'handlebars')
+// ===============================================
 // Define routes
 // ===============================================
 // Home
