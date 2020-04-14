@@ -1,1 +1,62 @@
 <h1>Hello World</h1>
+
+<form action="/home/datastore_search" name="parameters_form" id="parameters_form" method="POST">
+    <table>
+        <tr>
+            <td align="right">
+                WSO2 Gateway URL
+            </td>
+            <td>
+                <input type="text" name="wso2_gateway_url" id="wso2_gateway_url" value="{{wso2_gateway_url}}" size="40"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                WSO2 "context" of the CKAN API
+            </td>
+            <td>
+                <input type="text" name="wso2_ckan_context" id="wso2_ckan_context" value="{{wso2_ckan_context}}" size="40"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                WSO2 Subscription Key
+            </td>
+            <td>
+                <input type="text" name="wso2_subscription_key" id="wso2_subscription_key" value="{{wso2_subscription_key}}" size="40"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                CKAN Resource ID
+            </td>
+            <td>
+                <input type="text" name="ckan_resource_id" id="ckan_resource_id" value="{{ckan_resource_id}}" size="40"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                CKAN API Key (required for private resources)
+            </td>
+            <td>
+                <input type="text" name="ckan_api_key" id="ckan_api_key" value="{{ckan_api_key}}" size="40"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                Search Term (optional)
+            </td>
+            <td>
+                <input type="text" name="search_term" id="search_term" value="{{search_term}}" size="40"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                &nbsp;
+            </td>
+            <td>
+                <button type="submit">Go</button>
+            </td>
+        </tr>
+    </table>
+</form>
