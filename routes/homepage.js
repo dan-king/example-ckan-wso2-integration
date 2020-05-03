@@ -11,13 +11,15 @@ router.get('/', function(req, res){
     var default_ckan_resource_id = config.default_ckan_resource_id
     var default_ckan_api_key = config.default_ckan_api_key
     var default_max_records = config.default_max_records
+    var default_record_offset = config.default_record_offset
     res.render('home', {
         wso2_gateway_url: default_wso2_gateway_url,
         wso2_ckan_context: default_wso2_ckan_context,
         wso2_subscription_key: default_wso2_subscription_key,
         ckan_resource_id: default_ckan_resource_id,
         ckan_api_key: default_ckan_api_key,
-        max_records: default_max_records
+        max_records: default_max_records,
+        record_offset: default_record_offset
     })
 })
 
@@ -30,6 +32,7 @@ router.post('/datastore_search', function(req, res){
     var ckan_api_key = req.body.ckan_api_key
     var search_term = req.body.search_term
     var max_records = req.body.max_records
+    var record_offset = req.body.record_offset
 
     // ===================================================
     // Construct url based on input
@@ -38,7 +41,7 @@ router.post('/datastore_search', function(req, res){
     wso2_gateway_url = wso2_gateway_url.replace(/^\/|\/$/g, '')
     wso2_ckan_context = wso2_ckan_context.replace(/^\/|\/$/g, '')
     // Construct URL
-    var wso2_request_url = wso2_gateway_url + '/' + wso2_ckan_context + '/action/datastore_search?id=' + ckan_resource_id + '&limit=' + max_records
+    var wso2_request_url = wso2_gateway_url + '/' + wso2_ckan_context + '/action/datastore_search?id=' + ckan_resource_id + '&limit=' + max_records + '&offset=' + record_offset
     // Append optional search term
     if (search_term != '') {
         wso2_request_url = wso2_request_url + '&q=' + search_term
@@ -86,6 +89,7 @@ router.post('/datastore_search', function(req, res){
             ckan_api_key: ckan_api_key,
             search_term: search_term,
             max_records: max_records,
+            record_offset: record_offset,
             wso2_request_url: wso2_request_url,
             gateway_response: gateway_response,
             gateway_response_json: gateway_response_json
