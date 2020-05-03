@@ -5,5 +5,6 @@
     "default_wso2_ckan_context": "WSO2 CKAN CONTEXT GOES HERE",
     "default_wso2_subscription_key": "WSO2 SUBSCRIPTION KEY GOES HERE",
     "default_ckan_resource_id": "CKAN RESOURCE ID GOES HERE",
-    "default_ckan_api_key": "CKAN API KEY GOES HERE"
+    "default_ckan_api_key": "CKAN API KEY GOES HERE",
+    "default_max_records": "1000"
 }
