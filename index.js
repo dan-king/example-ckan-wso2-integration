@@ -13,6 +13,10 @@ var server = app.listen(app.get('port'), function () {
     console.log('Press Ctrl-C to terminate.')
 })
 // ===============================================
+// Define static public directory
+// ===============================================
+app.use(express.static(__dirname + '/public'))
+// ===============================================
 // Use 'body-parser' to enable reading of POST requests
 // in req.body
 // ===============================================

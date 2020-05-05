@@ -6,3 +6,6 @@ config.json
 
 # eslint
 .eslintrc.json
+
+# Ignore output
+public/output

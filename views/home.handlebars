@@ -83,6 +83,12 @@
     </p>
 {{/if}}
 
+{{#if filename}}
+    <div style="margin-bottom:10px" class="col-sm-6">
+        <a type="button" href="/output/{{filename}}" class="btn btn-info btn-lg fa fa-download" download="{{filename}}"> Download JSON</a>
+    </div>
+{{/if }}
+
 {{#if wso2_request_url}}
     <p>
     WSO2 Request URL: {{wso2_request_url}}

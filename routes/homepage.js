@@ -81,6 +81,17 @@ router.post('/datastore_search', function(req, res){
             gateway_response_json = '{"error": "body object is not valid JSON","result": { "body": "'+encodeURIComponent(body)+'" }}'
         }
         // ===================================================
+        // Save payload to disk
+        // ===================================================
+        var filepath='public/output/'
+        var filedata = gateway_response
+        const { v4: uuidv4 } = require('uuid') // npm i -S uuid
+        var guid = uuidv4()
+        var filenameprefix=getRawDate() + '_' + guid
+        var filename = filenameprefix + '.json'
+        write_data_to_disk(filepath, filename, filedata)
+
+        // ===================================================
         // Return Response
         // ===================================================
         res.render('home', {
@@ -96,9 +107,31 @@ router.post('/datastore_search', function(req, res){
             record_offset: record_offset,
             wso2_request_url: wso2_request_url,
             gateway_response: gateway_response,
-            gateway_response_json: gateway_response_json
+            gateway_response_json: gateway_response_json,
+            filename: filename
         })    
     })
 })
 
 module.exports = router
+
+function write_data_to_disk(filepath, filename, filedata) {
+    var fs = require('fs')
+    if (!fs.existsSync(filepath)){
+        console.log('Creating folder ' + filepath)
+        fs.mkdirSync(filepath)
+    }
+    console.log('Writing to file ' + filepath+filename)
+    console.log('Writing data ' + filedata)
+    fs.writeFile (filepath+filename, filedata, function(err) {
+        if (err) throw err
+    })
+}
+
+function getRawDate() {
+    var date = new Date()
+    var moment = require('moment-timezone') // npm i -S moment-timezone
+    var dt = moment.tz(date, 'America/Los_Angeles')
+    dt = dt.format('YYYYMMDDHHmmssSSS')
+    return dt
+}
