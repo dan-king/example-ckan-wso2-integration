@@ -2,6 +2,8 @@ var express = require('express')
 var router = express.Router()
 var request = require('request') // npm i -S request
 var config = require('./../config.json')
+var baseUrl = config.baseUrl
+var formUrl = baseUrl + 'home/datastore_search'
 
 // Show form with default values
 router.get('/', function(req, res){
@@ -13,6 +15,7 @@ router.get('/', function(req, res){
     var default_max_records = config.default_max_records
     var default_record_offset = config.default_record_offset
     res.render('home', {
+        formUrl: formUrl,
         wso2_gateway_url: default_wso2_gateway_url,
         wso2_ckan_context: default_wso2_ckan_context,
         wso2_subscription_key: default_wso2_subscription_key,
@@ -82,6 +85,7 @@ router.post('/datastore_search', function(req, res){
         // ===================================================
         res.render('home', {
             err: err,
+            formUrl: formUrl,
             wso2_gateway_url: wso2_gateway_url,
             wso2_ckan_context: wso2_ckan_context,
             wso2_subscription_key: wso2_subscription_key,

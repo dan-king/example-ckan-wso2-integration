@@ -9,7 +9,7 @@ if (app.get('env') == 'development') {
 }
 var server = app.listen(app.get('port'), function () {
     console.log('Listening on port %s.', server.address().port)
-    console.log('Website live in ' + config.env +' environment at http://localhost:' + app.get('port') + '/')
+    console.log('Website live in ' + config.env +' environment at http://localhost:' + app.get('port') + config.baseUrl)
     console.log('Press Ctrl-C to terminate.')
 })
 // ===============================================
@@ -28,12 +28,14 @@ app.set('view engine', 'handlebars')
 // ===============================================
 // Define routes
 // ===============================================
-// Home
-app.get('/', function(req, res){
-    res.redirect(303, '/home')
+var appRouter = express.Router()
+appRouter.get('/', function(req, res) {
+    res.redirect(303, config.baseUrl + 'home')
 })
 var homepage = require('./routes/homepage')
-app.use('/home', homepage)
+appRouter.use('/home', homepage)
+// Specify the base URL for the application
+app.use(config.baseUrl, appRouter)
 // ------------------------
 // Special routes if page not found or an error occurred
 // ------------------------

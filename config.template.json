@@ -1,6 +1,7 @@
 {
     "env": "development",
     "port": "3011",
+    "baseUrl": "/",
     "default_wso2_gateway_url": "WSO2 GATEWAY URL GOES HERE",
     "default_wso2_ckan_context": "WSO2 CKAN CONTEXT GOES HERE",
     "default_wso2_subscription_key": "WSO2 SUBSCRIPTION KEY GOES HERE",

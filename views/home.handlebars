@@ -1,6 +1,6 @@
 <h1>Example of CKAN DataStore Search via WSO2 API Gateway</h1>
 
-<form action="/home/datastore_search" name="parameters_form" id="parameters_form" method="POST" enctype="application/x-www-form-urlencoded">
+<form action="{{formUrl}}" name="parameters_form" id="parameters_form" method="POST" enctype="application/x-www-form-urlencoded">
     <table>
         <tr>
             <td align="right">
@@ -95,5 +95,14 @@
     </p>
     <div>
         {{gateway_response}}
+    </div>
+{{/if}}
+
+{{#if formUrl}}
+    <p>
+    Form URL:
+    </p>
+    <div>
+        {{formUrl}}
     </div>
 {{/if}}
